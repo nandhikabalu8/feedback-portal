@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feedback</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-3">
+
+<nav class="navbar bg-dark navbar-dark mb-3">
+  <span class="navbar-brand">Feedback Portal</span>
+</nav>
+
+<div class="alert alert-info">Give your feedback</div>
+
+<input id="name" class="form-control mb-2" placeholder="Name">
+<textarea id="msg" class="form-control mb-2" placeholder="Feedback"></textarea>
+<button class="btn btn-success" onclick="save()">Submit</button>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m">View</button>
+
+<div class="modal fade" id="m">
+  <div class="modal-dialog">
+    <div class="modal-content p-3" id="list"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function save(){
+ let f=JSON.parse(localStorage.getItem("f"))||[];
+ f.push(name.value+": "+msg.value);
+ localStorage.setItem("f",JSON.stringify(f));
+ name.value=msg.value="";
+}
+m.addEventListener("show.bs.modal",()=>{
+ list.innerHTML=(JSON.parse(localStorage.getItem("f"))||[]).join("<hr>");
+});
+</script>
+
+</body>
+</html>
